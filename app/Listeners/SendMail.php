@@ -3,9 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\SendMail as SendMailEvent;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendMail
+class SendMail implements ShouldQueue
 {
     /**
      * Create the event listener.
