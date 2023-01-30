@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SendMailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+# rota para verificar template do email
+Route::resource('send-mail', SendMailController::class)
+    ->except(
+        ['edit', 'update', 'delete', 'index', 'store', 'create', 'destroy']
+    );
