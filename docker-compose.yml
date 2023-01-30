@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+
+    php:
+        container_name: task-scheduling-php
+        build: docker/php
+        environment:
+            - DEBUG=1
+        working_dir: /var/www/task-scheduling
+        volumes:
+            - ./:/var/www/task-scheduling
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    nginx:
+        container_name: task-scheduling-nginx
+        build: docker/nginx
+        links:
+            - php
+        ports:
+            - "8002:80"
+        working_dir: /var/www/task-scheduling
+        volumes:
+            - ./:/var/www/task-scheduling
