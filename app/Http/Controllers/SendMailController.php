@@ -16,7 +16,9 @@ class SendMailController extends Controller
 
         $email = new SendMail();
 
-        Mail::to($email_origin)->send($email);
+        Mail::to($email_origin)->queue($email);
+
+        #sleep(2);
 
         return 'teste';
     }
