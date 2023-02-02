@@ -28,16 +28,24 @@ class SendMailController extends Controller
      */
     public function store(Request $request): array
     {
+        # qtd tentative transaction
+        $tentatives = 3;
+
         $data = $request->all();
 
-        DB::transaction(function () use ($data, &$user) {
+        $user = DB::transaction(function () use ($data) {
 
             $user = User::create($data);
 
-        });
+            return $user;
 
-        return [
+        }, $tentatives);
+
+        $ret = [
             'data' => $user
         ];
+
+
+        return $ret;
     }
 }
