@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Events\SendMail;
-use App\Models\User;
+use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SendMailController extends Controller
 {
+    private $repository;
+
+    public function __construct(UsersRepository $repository)
+    {
+        $this->repository = $repository;
+
+    }
+
     /**
      * @param $email_origin
      * @return string
@@ -28,24 +35,11 @@ class SendMailController extends Controller
      */
     public function store(Request $request): array
     {
-        # qtd tentative transaction
-        $tentatives = 3;
-
         $data = $request->all();
 
-        $user = DB::transaction(function () use ($data) {
-
-            $user = User::create($data);
-
-            return $user;
-
-        }, $tentatives);
-
-        $ret = [
-            'data' => $user
-        ];
+        $this->repository->add($data);
 
 
-        return $ret;
+        return [];
     }
 }
