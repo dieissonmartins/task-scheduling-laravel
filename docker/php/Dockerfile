@@ -7,7 +7,7 @@ RUN apk add wget
 
 RUN apk add --no-cache --virtual .phpize_deps $PHPIZE_DEPS
 
-RUN pecl install xdebug
+RUN pecl install xdebug-3.1.5
 
 RUN docker-php-ext-enable xdebug \
     && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
