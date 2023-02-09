@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SendMail;
+use App\Jobs\TestCustomJob;
 use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 
@@ -48,6 +49,14 @@ class SendMailController extends Controller
      */
     public function testCustomJob(): string
     {
+        $params = [
+            'people_id' => 000000,
+            'user_id' => 111111,
+            'item_id' => 222222
+        ];
+
+        TestCustomJob::dispatch($params);
+
         return "test custom job";
     }
 }
