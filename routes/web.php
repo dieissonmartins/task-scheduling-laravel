@@ -23,3 +23,5 @@ Route::resource('send-mail', SendMailController::class)
     ->except(
         ['edit', 'update', 'delete', 'index', 'store', 'create', 'destroy']
     );
+
+Route::get('test-custom-job', [SendMailController::class, 'testCustomJob']);

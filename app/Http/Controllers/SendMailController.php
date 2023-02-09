@@ -42,4 +42,12 @@ class SendMailController extends Controller
 
         return [];
     }
+
+    /**
+     * @return string
+     */
+    public function testCustomJob(): string
+    {
+        return "test custom job";
+    }
 }
